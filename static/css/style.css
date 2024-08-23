@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CSS Navbar */
+
+.title-navbar{
+    font-size: 4em;
+    font-weight: bold;
+    color: rgb(8, 78, 8);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.content-navbar{
+    background-color:rgb(230, 229, 203);
+    max-height: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-navbar-title {
+    background-color:rgb(230, 229, 203);
+    padding: 20px;
+}
+
+.item-navbar{
+    background-color:rgb(199, 199, 158);
+    padding: 15px;
+    margin: 0px 15px 20px 15px;
+    border-radius: 10px;
+    color: rgb(46, 38, 19);
+    font-weight: 700;
+    font-size: 1em;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-navbar:hover{
+    color: white;
+    background-color:rgb(78, 78, 60);
+    cursor: pointer;
+
+}
+
