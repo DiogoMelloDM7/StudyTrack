@@ -4,6 +4,29 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 11px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #2221118a; 
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #2221117c; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #222111a2; 
+  }
+
+
 /* CSS Navbar */
 
 .title-navbar{
@@ -19,6 +42,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: max-height 0.5s ease-out;
 }
 
 .content-navbar-title {
@@ -44,6 +68,167 @@
     color: white;
     background-color:rgb(78, 78, 60);
     cursor: pointer;
+    transition: 0.4s;
 
 }
+
+.menu-toggle{
+    display: none;
+}
+
+.menu-icon{
+    display: none;
+    cursor: pointer;
+    font-size: 2em;
+    padding: 10px;
+    background-color: rgb(230, 229, 203);
+    border-radius: 5px;
+}
+
+.content-img-main {
+    margin: 0 75px 50px 75px;
+    height: 350px;
+    overflow: hidden; /* Garante que a imagem não transborde da section */
+    position: relative; /* Necessário para o posicionamento absoluto da imagem */
+}
+
+#main_img {
+    width: 100%; /* Faz a imagem ocupar toda a largura da section */
+    height: 100%; /* Faz a imagem ocupar toda a altura da section */
+    object-fit: cover; /* Faz com que a imagem cubra a seção sem distorção */
+    position: absolute; /* Permite que a imagem ocupe toda a área da section */
+    top: 0; /* Alinha a imagem ao topo da section */
+    left: 0; /* Alinha a imagem à esquerda da section */
+}
+
+.text-main {
+    position: absolute; /* Permite posicionar o texto sobre a imagem */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta a posição para que o centro do texto esteja no centro da seção */
+    color: rgb(22, 71, 61); /* Cor do texto para contraste com a imagem */
+    font-size: 28px; /* Tamanho da fonte, ajuste conforme necessário */
+    font-weight: 700;
+    text-align: center; /* Centraliza o texto */
+    background-color: rgba(243, 240, 240, 0.712); /* Fundo semi-transparente para legibilidade */
+    padding: 10px; /* Espaçamento interno para tornar o texto mais legível */
+    border-radius: 5px; /* Borda arredondada para um efeito visual agradável */
+}
+
+.content-img-options {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 110px 50px 110px;
+}
+
+.content-img-options > a{
+    text-decoration: none;
+}
+
+.title-img-option{
+    font-size: 1.4em;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    color: rgb(46, 38, 19);
+}
+
+.img-option > img{
+    width: 300px;
+    height: 200px;
+}
+
+.img-option:hover{
+    background-color: #f2f1dd; border-radius: 5%; transition: transform .5s; 
+    cursor: pointer;
+    transform: scale(1.2)rotate(1deg);
+    border: 2px solid #d9d6ab;
+    transform: translate(0px, -20px);
+    box-shadow: 10px 10px 20px rgba(255, 246, 246, 0.699);
+    padding: 10px;
+}
+
+.img-option:hover .title-img-option {
+    color:rgba(63, 53, 31, 0.534);
+}
+
+.content-footer{
+    background-color:rgb(230, 229, 203);
+    max-height: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Estilos responsivos para telas menores */
+@media (max-width: 1250px) {
+    /* Esconde os itens da navbar por padrão */
+    .content-navbar {
+        display: none;
+        flex-direction: column;
+    }
+
+    /* Mostra o menu hamburger */
+    .menu-icon {
+        display: block;
+    }
+
+    /* Exibe o menu quando o checkbox é marcado */
+    .menu-toggle:checked + .menu-icon + .content-navbar {
+        display: flex;
+        max-height: 400px;
+    }
+
+}
+
+@media (max-width: 1200px){
+
+    .content-img-options {
+        display: flex;
+        flex-direction: column;
+        margin: 0 110px 50px 110px;
+        align-items: center;
+    }
+
+}
+
+@media (max-width: 800px){
+
+    .text-main {
+        position: absolute; /* Permite posicionar o texto sobre a imagem */
+        top: 50%; /* Centraliza verticalmente */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translate(-50%, -50%); /* Ajusta a posição para que o centro do texto esteja no centro da seção */
+        color: rgb(22, 71, 61); /* Cor do texto para contraste com a imagem */
+        font-size: 20px; /* Tamanho da fonte, ajuste conforme necessário */
+        font-weight: 700;
+        text-align: center; /* Centraliza o texto */
+        background-color: rgba(243, 240, 240, 0.712); /* Fundo semi-transparente para legibilidade */
+        padding: 10px; /* Espaçamento interno para tornar o texto mais legível */
+        border-radius: 5px; /* Borda arredondada para um efeito visual agradável */
+    }
+
+}
+
+@media (max-width: 500px){
+
+    .title-navbar{
+        font-size: 3em;
+        font-weight: bold;
+        color: rgb(8, 78, 8);
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    
+    .content-img-main {
+        margin: 0 75px 50px 75px;
+        height: 450px;
+        overflow: hidden; /* Garante que a imagem não transborde da section */
+        position: relative; /* Necessário para o posicionamento absoluto da imagem */
+    }
+
+}
+
 

@@ -6,4 +6,40 @@ Homepage
 
 {% block content %}
 
+<main>
+    <section>
+        <article class="content-img-main">
+            <img id="main_img" src="{% static 'images/imagem_principal.jpg' %}">
+            <div class="text-main">Com o StudyTrack, você tem todas as ferramentas que precisa para planejar, acompanhar e conquistar seus objetivos acadêmicos. Comece hoje e transforme a forma como você estuda!</div>
+        </article>
+
+        <article class="content-img-options">
+
+            <a href="#">
+                <div class='img-option'>
+                    <p class="title-img-option">Comunidade</p>
+                    <img src="{% static 'images/comunidade.jpeg' %}">
+                </div>
+            </a>
+            
+            <a href="#">
+                <div class='img-option'>
+                    <p class="title-img-option">Quiz da Comunidade</p>
+                    <img src="{% static 'images/quiz_comunidade.jpeg' %}">
+                </div>
+            </a>
+    
+            <a href="#">
+                <div class='img-option'>
+                    <p class="title-img-option">Mensagem do Dia</p>
+                    <img src="{% static 'images/quiz_comunidade.jpeg' %}">
+                </div>
+            </a>
+
+        </article>
+    </section>
+    
+    
+</main>
+
 {% endblock %}
