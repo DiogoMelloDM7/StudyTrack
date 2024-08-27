@@ -3,15 +3,15 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('calendar_diary.urls')),
-    path('', include('community.urls')),
-    path('', include('integrations.urls')),
-    path('', include('motivation.urls')),
-    path('', include('planner.urls')),
-    path('', include('quizzes.urls')),
-    path('', include('reports.urls')),
-    path('', include('study_materials.urls')),
-    path('', include('study_tracks.urls')),
-    path('', include('tasks.urls')),
+    path('', include('calendar_diary.urls', namespace="calendar_diary")),
+    path('', include('community.urls', namespace="community")),
+    path('', include('integrations.urls', namespace="integrations")),
+    path('', include('motivation.urls', namespace="motivation")),
+    path('', include('planner.urls', namespace="planner")),
+    path('', include('quizzes.urls', namespace="quizzes")),
+    path('', include('reports.urls', namespace="reports")),
+    path('', include('study_materials.urls', namespace="study_materials")),
+    path('', include('study_tracks.urls', namespace="study_tracks")),
+    path('', include('tasks.urls', namespace="tasks")),
 
 ]

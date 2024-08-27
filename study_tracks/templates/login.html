@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <section class="login-container">
+        <article class="login-form">
+            <h2 class="title-login">LOGIN</h2>
+            <form action="{% url 'study_tracks:login' %}" method="post" class="form-login">
+                {% csrf_token %}
+                <div class="form-group-login">
+                    <label for="usernameOrEmail">Usuário ou Email</label>
+                    <input type="text" id="usernameOrEmail" name="usernameOrEmail" required>
+                </div>
+                <div class="form-group-login">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+        </article>
+
+        <article class="login-image">
+            <img id="main_img_login" src="{% static 'images/imagem_principal.jpg' %}">
+        </article>
+    </section>
+
+    <div id="error-message" display="none">
+        {% if erro %}
+            <p class="error-login">{{ erro }}</p>
+        {% endif %}
+        </div>
+</main>
+
+{% endblock %}
