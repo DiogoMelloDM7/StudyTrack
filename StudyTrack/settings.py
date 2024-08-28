@@ -137,3 +137,10 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTH_USER_MODEL = 'study_tracks.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'study_tracks.backends.email_backend.EmailBackend',  
+    'django.contrib.auth.backends.ModelBackend',
+]

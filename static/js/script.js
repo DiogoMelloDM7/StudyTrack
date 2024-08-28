@@ -4,6 +4,8 @@ function showErrorMessage() {
 
     setTimeout(function() {
         errorMessage.style.display = "none";
-    }, 3000);
+    }, 4000);
 }
-showErrorMessage();
+document.addEventListener("DOMContentLoaded", function() {
+    showErrorMessage();
+});

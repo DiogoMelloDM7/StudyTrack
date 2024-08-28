@@ -7,6 +7,11 @@ Login
 {% block content %}
 
 <main>
+    <div id="error-message" display="none">
+        {% if erro %}
+            <p class="error-login">{{ erro }}</p>
+        {% endif %}
+    </div>
     <section class="login-container">
         <article class="login-form">
             <h2 class="title-login">LOGIN</h2>
@@ -22,18 +27,19 @@ Login
                 </div>
                 <button type="submit" class="btn-login">Entrar</button>
             </form>
+
+            <a href="{% url 'study_tracks:cadastro' %}" style="text-decoration: none;">
+                <div class='cadastro-login'>
+                    <h2>Não possui uma conta? Cadastra-se aqui!</h2>
+                </div>
+            </a>
         </article>
+
 
         <article class="login-image">
             <img id="main_img_login" src="{% static 'images/imagem_principal.jpg' %}">
         </article>
     </section>
-
-    <div id="error-message" display="none">
-        {% if erro %}
-            <p class="error-login">{{ erro }}</p>
-        {% endif %}
-        </div>
 </main>
 
 {% endblock %}
