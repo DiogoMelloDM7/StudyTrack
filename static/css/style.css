@@ -200,6 +200,10 @@
     object-fit: cover;
 }
 
+#main_img_cadastro {
+    object-fit: cover;
+}
+
 .title-login{
     display: flex;
     justify-content: center;

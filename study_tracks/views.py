@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
+from .forms import CustomUserCreationForm
 
 def homepage(request):
     return render(request, 'homepage.html')
@@ -23,6 +24,13 @@ def login(request):
 
 
 def cadastro(request):
-    return render(request, 'cadastro.html')
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            return redirect('study_tracks:login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'cadastro.html', {'form': form})
 
 
