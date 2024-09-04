@@ -12,11 +12,12 @@ Cadastro
             <p class="error-login">{{ erro }}</p>
         {% endif %}
     </div>
-    <section class='login-container'>
-        <article class='form-login'>
-            <h2 class="title-login">CADASTRA-SE</h2>
-            <form action="{% url 'study_tracks:cadastro' %}" method="POST" enctype="multipart/form-data" class="form-login">
+    <section class="login-container">
+        <article class="form-cadastro">
+            <h2 class="title-cadastro">CADASTRE-SE</h2>
+            <form action="{% url 'study_tracks:cadastro' %}" method="post" enctype="multipart/form-data" class="form-login">
                 {% csrf_token %}
+                
                 <div class="form-group-cadastro">
                     <label for="username">Usuário</label>
                     <input type="text" id="usernameId" name="username" required>
@@ -47,7 +48,7 @@ Cadastro
                 </div>
                 <div class="form-group-cadastro">
                     <label for="security_questions">Perguntas de Segurança</label>
-                    <select id="securityQuestionsId" name="security_questions" multiple required>
+                    <select id="securityQuestionsId" name="security_questions" required>
                         <option value="question1">Pergunta 1</option>
                         <option value="question2">Pergunta 2</option>
                         <option value="question3">Pergunta 3</option>
@@ -59,17 +60,15 @@ Cadastro
                     <label for="response_security">Resposta da pergunta de segurança</label>
                     <input type="text" id="response_securityId" name="response_security">
                 </div>
-                <button type="submit" class="btn-login">Cadastrar</button>
+                
+                <button type="submit" class="btn-login">CADASTRAR</button>
             </form>
         </article>
-        
 
         <article class="login-image">
             <img id="main_img_cadastro" src="{% static 'images/imagem_principal.jpg' %}">
         </article>
     </section>
-    
-    
 </main>
 
 {% endblock %}

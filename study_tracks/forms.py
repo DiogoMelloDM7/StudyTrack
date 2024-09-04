@@ -23,6 +23,10 @@ class CustomUserCreationForm(forms.ModelForm):
         model = CustomUser
         fields = ['username', 'email', 'password', 'profile_picture', 'date_of_birth', 'bio', 'phone_number', 'security_questions', 'response_security']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].help_text = 'Insira um nome de usuário exclusivo. Máximo de 150 caracteres contendo letras, dígitos e @/./+/-/_ apenas.'       
+
     def save(self, commit=True):
         user = super().save(commit=False)
         password = self.cleaned_data.pop('password')
