@@ -3,6 +3,7 @@ from .models import CustomUser
 
 class CustomUserCreationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
     profile_picture = forms.ImageField(required=False)
     date_of_birth = forms.DateField(required=False, widget=forms.TextInput(attrs={'type': 'date'}))
     bio = forms.CharField(required=False, widget=forms.Textarea)
@@ -21,11 +22,15 @@ class CustomUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password', 'profile_picture', 'date_of_birth', 'bio', 'phone_number', 'security_questions', 'response_security']
+        fields = ['username', 'email', 'password', 'confirm_password', 'profile_picture', 'date_of_birth', 'bio', 'phone_number', 'security_questions', 'response_security']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].help_text = 'Insira um nome de usuário exclusivo. Máximo de 150 caracteres contendo letras, dígitos e @/./+/-/_ apenas.'       
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError("As senhas não coincidem. Por favor, tente novamente.")
 
     def save(self, commit=True):
         user = super().save(commit=False)
