@@ -7,11 +7,6 @@ Cadastro
 {% block content %}
 
 <main>
-    <div id="error-message" display="none">
-        {% if erro %}
-            <p class="error-login">{{ erro }}</p>
-        {% endif %}
-    </div>
     <section class="login-container">
         <article class="form-cadastro">
             <h2 class="title-cadastro">CADASTRE-SE</h2>
@@ -20,19 +15,34 @@ Cadastro
                 
                 <div class="form-group-cadastro">
                     <label for="username">Usuário</label>
-                    <input type="text" id="usernameId" name="username" required>
+                    <input type="text" id="usernameId" name="username" value="{{ form.username.value|default_if_none:'' }}" required>
+                    {% if form.username.errors %}
+                        <p class="error">{{ form.username.errors.0 }}</p>
+                    {% endif %}
                 </div>
+                
                 <div class="form-group-cadastro">
                     <label for="email">E-mail</label>
-                    <input type="email" id="emailId" name="email" required>
+                    <input type="email" id="emailId" name="email" value="{{ form.email.value|default_if_none:'' }}" required>
+                    {% if form.email.errors %}
+                        <p class="error">{{ form.email.errors.0 }}</p>
+                    {% endif %}
                 </div>
+
                 <div class="form-group-cadastro">
                     <label for="password">Senha</label>
                     <input type="password" id="passwordId" name="password" required>
+                    {% if form.password.errors %}
+                        <p class="error">{{ form.password.errors.0 }}</p>
+                    {% endif %}
                 </div>
+                
                 <div class="form-group-cadastro">
                     <label for="confirm_password">Confirmar Senha</label>
                     <input type="password" id="confirmPasswordId" name="confirm_password" required>
+                    {% if form.confirm_password.errors %}
+                        <p class="error">{{ form.confirm_password.errors.0 }}</p>
+                    {% endif %}
                 </div>
                 <div class="form-group-cadastro">
                     <label for="profile_picture">Foto de Perfil</label>

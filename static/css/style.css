@@ -337,6 +337,13 @@
     padding: 10px;
 }
 
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+
 
 /* Estilos responsivos para telas menores */
 @media (max-width: 1250px) {

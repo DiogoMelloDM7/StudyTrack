@@ -27,8 +27,13 @@ def cadastro(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
+            print("OK")
             user = form.save()
             return redirect('study_tracks:login')
+        else:
+            print(form.errors)
+            return render(request, 'cadastro.html', {'form': form})
+            
     else:
         form = CustomUserCreationForm()
     return render(request, 'cadastro.html', {'form': form})

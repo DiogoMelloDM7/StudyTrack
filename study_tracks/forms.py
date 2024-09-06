@@ -29,9 +29,10 @@ class CustomUserCreationForm(forms.ModelForm):
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
 
-        if password != confirm_password:
-            raise forms.ValidationError("As senhas não coincidem. Por favor, tente novamente.")
-
+        if password and confirm_password and password != confirm_password:
+            self.add_error('confirm_password', "As senhas não coincidem. Por favor, tente novamente.")
+        return cleaned_data
+    
     def save(self, commit=True):
         user = super().save(commit=False)
         password = self.cleaned_data.pop('password')
