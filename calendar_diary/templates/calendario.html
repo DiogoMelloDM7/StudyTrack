@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+Cadastro
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <section class="login-container">
+        <!-- Botão para adicionar evento -->
+        <button id="btn-add-event">Adicionar Evento</button>
+
+        <!-- Formulário oculto para adicionar evento -->
+        <div id="event-form-container" style="display: none;">
+            <form id="event-form" method="POST">
+                {% csrf_token %}
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" required><br>
+
+                <label for="description">Descrição:</label>
+                <input type="text" id="description" name="description" required><br>
+
+                <label for="dateEvent">Data:</label>
+                <input type="datetime-local" id="dateEvent" name="dateEvent" required><br>
+
+                <label for="localization">Localização:</label>
+                <input type="text" id="localization" name="localization"><br>
+
+                <label for="category">Categoria:</label>
+                <input type="text" id="category" name="category"><br>
+
+                <button type="submit">Salvar Evento</button>
+            </form>
+        </div>
+
+        <!-- Calendário -->
+        <div id="calendar"></div>
+
+        <!-- Scripts do FullCalendar -->
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet"/>
+
+        <!-- Script para inicialização do calendário e controle do formulário -->
+        <script>
+            // Dados de eventos para o FullCalendar
+            var eventsData = [
+                {% for event in events %}
+                {
+                    title: '{{ event.title }}',
+                    start: '{{ event.dateEvent|date:"Y-m-dTH:i:s" }}',
+                    description: '{{ event.description }}',
+                    location: '{{ event.localization }}',
+                    category: '{{ event.category }}'
+                },
+                {% endfor %}
+            ];
+
+            // Função para exibir/ocultar o formulário de evento
+            function showEventForm() {
+                var formContainer = document.getElementById('event-form-container');
+                if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                    formContainer.style.display = "block";
+                } else {
+                    formContainer.style.display = "none";
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Inicializar o FullCalendar
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    events: eventsData,  // Usa a variável definida no template HTML
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    }
+                });
+                calendar.render();
+
+                // Associar o botão para adicionar eventos
+                var btnAddEvent = document.getElementById('btn-add-event');
+                btnAddEvent.addEventListener('click', showEventForm);
+            });
+        </script>
+    </section>
+</main>
+
+{% endblock %}
