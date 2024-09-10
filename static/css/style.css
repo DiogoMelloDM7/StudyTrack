@@ -343,6 +343,59 @@
     margin-top: 5px;
 }
 
+/* Calendário */
+
+.content-form-calendar{
+    flex: 3; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    padding: 20px;
+    background-color: #f7f7f7; 
+    overflow-y: auto; 
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.content-calendar{
+    flex: 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Evita barras de rolagem */
+}
+
+.btn-add-event{
+    width: 300px;
+    height: 100px;
+    background-color: #009708;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 50px;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.btn-add-event:hover{
+    transition: 0.5s;
+    background-color: #006905;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-size: 12px;
+}
+
+#calendar{
+    width: 80%;
+}
+
 
 
 /* Estilos responsivos para telas menores */
@@ -478,10 +531,7 @@
         justify-content: space-evenly;
         margin: 0;
     }
-
     
-
-
 }
 
 

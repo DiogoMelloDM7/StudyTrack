@@ -18,25 +18,60 @@ function showEventForm() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    showErrorMessage();
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar se o FullCalendar está disponível
+    if (typeof FullCalendar !== 'undefined') {
+        console.log('FullCalendar está carregado corretamente.');
+        
+        var calendarEl = document.getElementById('calendar');
+        
+        if (calendarEl) {
+            // Inicializar o calendário
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: eventsData, // Usa a variável definida no template HTML
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                eventMouseEnter: function(info) {
+                    var tooltip = document.createElement('div');
+                    tooltip.classList.add('tooltip');
+                    tooltip.innerHTML = `
+                        <strong>Título:</strong> ${info.event.title} <br>
+                        <strong>Data:</strong> ${info.event.start.toLocaleString()} <br>
+                        <strong>Descrição:</strong> ${info.event.extendedProps.description} <br>
+                        <strong>Localização:</strong> ${info.event.extendedProps.location} <br>
+                        <strong>Categoria:</strong> ${info.event.extendedProps.category}
+                    `;
+                    document.body.appendChild(tooltip);
 
-    // Inicializar o FullCalendar
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',  // Exibe o calendário como grid de dias
-        events: '/calendar_diary/events/',  // URL para buscar eventos do banco de dados (API)
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-    });
-    calendar.render();
+                    tooltip.style.left = info.jsEvent.pageX + 'px';
+                    tooltip.style.top = info.jsEvent.pageY + 'px';
+                },
+                eventMouseLeave: function() {
+                    var tooltips = document.getElementsByClassName('tooltip');
+                    while (tooltips.length) {
+                        tooltips[0].remove();
+                    }
+                }
+            });
 
-    // Mostrar/ocultar o formulário de evento ao clicar no botão
-    var addEventButton = document.getElementById('addEventButton');
-    addEventButton.addEventListener('click', function() {
-        showEventForm();
-    });
+            // Renderizar o calendário
+            calendar.render();
+        } else {
+            console.error('Elemento #calendar não encontrado.');
+        }
+    } else {
+        console.error('FullCalendar não está definido.');
+    }
+
+    // Função para exibir o formulário de evento
+    var btnAddEvent = document.getElementById('btn-add-event');
+    if (btnAddEvent) {
+        btnAddEvent.addEventListener('click', showEventForm);
+    }
 });
+
+

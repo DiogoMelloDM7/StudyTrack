@@ -10,3 +10,5 @@ class Event(models.Model):
     category = models.CharField(max_length=100, blank=True, null=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title + '-' + self.description
