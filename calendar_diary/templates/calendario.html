@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block titulo %}Cadastro{% endblock %}
 
 {% block content %}
@@ -36,7 +37,7 @@
             {% for event in events %}
                 {{ event }} <br>
                 title: '{{ event.title }}',<br>
-                start: '{{ event.dateEvent|date:"Y-m-dTH:i:sP" }}',<br>
+                start: '{{ event.dateEvent|date:"Y-m-dTH:i:s" }}',<br>
                 description: '{{ event.description }}',<br>
                 location: '{{ event.localization }}',<br>
                 category: '{{ event.category }}'<br><br>
@@ -48,15 +49,16 @@
                 var eventsData = [
                     {% for event in events %}
                     {
-                        title: '{{ event.title }}',
-                        start: '{{ event.dateEvent|date:"Y-m-dTH:i:sP" }}',
-                        description: '{{ event.description }}',
-                        location: '{{ event.localization }}',
-                        category: '{{ event.category }}'
-                    },
+                        title: '{{ event.title|escapejs }}',
+                        start: '{{ event.dateEvent|date:"Y-m-dTH:i:s" }}',
+                        description: '{{ event.description|escapejs }}',
+                        location: '{{ event.localization|escapejs }}',
+                        category: '{{ event.category|escapejs }}'
+                    }{% if not forloop.last %},{% endif %}
                     {% endfor %}
                 ];
             </script>
+            <script src="{% static 'js/script.js' %}"></script>
         </article>
     </section>
 </main>

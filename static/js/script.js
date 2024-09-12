@@ -19,52 +19,45 @@ function showEventForm() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Verificar se o FullCalendar está disponível
-    if (typeof FullCalendar !== 'undefined') {
-        console.log('FullCalendar está carregado corretamente.');
-        
-        var calendarEl = document.getElementById('calendar');
-        
-        if (calendarEl) {
-            // Inicializar o calendário
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: eventsData, // Usa a variável definida no template HTML
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                eventMouseEnter: function(info) {
-                    var tooltip = document.createElement('div');
-                    tooltip.classList.add('tooltip');
-                    tooltip.innerHTML = `
-                        <strong>Título:</strong> ${info.event.title} <br>
-                        <strong>Data:</strong> ${info.event.start.toLocaleString()} <br>
-                        <strong>Descrição:</strong> ${info.event.extendedProps.description} <br>
-                        <strong>Localização:</strong> ${info.event.extendedProps.location} <br>
-                        <strong>Categoria:</strong> ${info.event.extendedProps.category}
-                    `;
-                    document.body.appendChild(tooltip);
+    console.log('Eventos Data:', eventsData); // Verifique os dados dos eventos no console
 
-                    tooltip.style.left = info.jsEvent.pageX + 'px';
-                    tooltip.style.top = info.jsEvent.pageY + 'px';
-                },
-                eventMouseLeave: function() {
-                    var tooltips = document.getElementsByClassName('tooltip');
-                    while (tooltips.length) {
-                        tooltips[0].remove();
-                    }
+    var calendarEl = document.getElementById('calendar');
+
+    if (calendarEl) {
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: eventsData,
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            eventMouseEnter: function(info) {
+                var tooltip = document.createElement('div');
+                tooltip.classList.add('tooltip');
+                tooltip.innerHTML = `
+                    <strong>Título:</strong> ${info.event.title} <br>
+                    <strong>Data:</strong> ${info.event.start.toLocaleString()} <br>
+                    <strong>Descrição:</strong> ${info.event.extendedProps.description} <br>
+                    <strong>Localização:</strong> ${info.event.extendedProps.location} <br>
+                    <strong>Categoria:</strong> ${info.event.extendedProps.category}
+                `;
+                document.body.appendChild(tooltip);
+
+                tooltip.style.left = info.jsEvent.pageX + 'px';
+                tooltip.style.top = info.jsEvent.pageY + 'px';
+            },
+            eventMouseLeave: function() {
+                var tooltips = document.getElementsByClassName('tooltip');
+                while (tooltips.length) {
+                    tooltips[0].remove();
                 }
-            });
+            }
+        });
 
-            // Renderizar o calendário
-            calendar.render();
-        } else {
-            console.error('Elemento #calendar não encontrado.');
-        }
+        calendar.render();
     } else {
-        console.error('FullCalendar não está definido.');
+        console.error('Elemento #calendar não encontrado.');
     }
 
     // Função para exibir o formulário de evento

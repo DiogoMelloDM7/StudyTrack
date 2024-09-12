@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import Event
 from .forms import EventForm
+from datetime import datetime
+from django.core.serializers.json import DjangoJSONEncoder
 
 @login_required
 def calendario(request):
@@ -15,6 +17,7 @@ def calendario(request):
             return redirect('calendar_diary:calendario')  # Recarrega a página para atualizar os eventos
     else:
         form = EventForm()
+
     
     user_events = Event.objects.filter(user=request.user)  # Filtra os eventos do usuário
     return render(request, 'calendario.html', {'events': user_events, 'form': form})
@@ -38,3 +41,10 @@ def add_event(request):
         form = EventForm()
 
     return render(request, 'calendar_diary/add_event.html', {'form': form})
+
+
+class EventEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%dT%H:%M:%S')
+        return super().default(obj)
