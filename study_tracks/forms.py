@@ -1,5 +1,6 @@
 from django import forms
 from .models import CustomUser
+from pytz import common_timezones
 
 class CustomUserCreationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -19,10 +20,11 @@ class CustomUserCreationForm(forms.ModelForm):
         required=True
     )
     response_security = forms.CharField(required=True)
+    timezone = forms.ChoiceField(choices=[(tz, tz) for tz in common_timezones])
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password', 'confirm_password', 'profile_picture', 'date_of_birth', 'bio', 'phone_number', 'security_questions', 'response_security']
+        fields = ['username', 'email', 'password', 'confirm_password', 'profile_picture', 'date_of_birth', 'bio', 'phone_number', 'security_questions', 'response_security', 'timezone']
 
     def clean(self):
         cleaned_data = super().clean()

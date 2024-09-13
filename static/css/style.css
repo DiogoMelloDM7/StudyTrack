@@ -382,6 +382,40 @@
     background-color: #006905;
 }
 
+.btn-edit-event{
+    width: 300px;
+    height: 100px;
+    background-color: #003c97;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 50px;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.btn-edit-event:hover{
+    transition: 0.5s;
+    background-color: #070069;
+}
+
+.btn-delete-event{
+    width: 300px;
+    height: 100px;
+    background-color: #ec1818;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 50px;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.btn-delete-event:hover{
+    transition: 0.5s;
+    background-color: #690000;
+}
+
 .tooltip {
     position: absolute;
     background-color: #333;

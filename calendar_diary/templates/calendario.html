@@ -8,6 +8,8 @@
     <section class="login-container">
         <article class='content-form-calendar'>
             <button class='btn-add-event' id="btn-add-event">Adicionar Evento</button>
+            <button class='btn-edit-event' id="btn-edit-event">Editar Evento</button>
+            <button class='btn-delete-event' id="btn-delete-event">Excluir Evento</button>
             <div id="event-form-container" style="display: none;">
                 <form id="event-form" method="POST">
                     {% csrf_token %}
@@ -34,14 +36,6 @@
                     <button type="submit" class='btn-login'>Salvar Evento</button>
                 </form>
             </div>
-            {% for event in events %}
-                {{ event }} <br>
-                title: '{{ event.title }}',<br>
-                start: '{{ event.dateEvent|date:"Y-m-dTH:i:s" }}',<br>
-                description: '{{ event.description }}',<br>
-                location: '{{ event.localization }}',<br>
-                category: '{{ event.category }}'<br><br>
-            {% endfor %}
         </article>
         <article class='content-calendar'>
             <div id="calendar"></div>
@@ -50,7 +44,7 @@
                     {% for event in events %}
                     {
                         title: '{{ event.title|escapejs }}',
-                        start: '{{ event.dateEvent|date:"Y-m-dTH:i:s" }}',
+                        start: new Date('{{ event.dateEvent|date:"c" }}'),
                         description: '{{ event.description|escapejs }}',
                         location: '{{ event.localization|escapejs }}',
                         category: '{{ event.category|escapejs }}'

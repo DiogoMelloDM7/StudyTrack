@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import pytz
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True) 
@@ -14,6 +15,8 @@ class CustomUser(AbstractUser):
     friends_followers = models.IntegerField(default=0)  
     friend_list = models.ManyToManyField('self', related_name='friends', blank=True, symmetrical=False) 
     blocked_users_list = models.ManyToManyField('self', related_name='blocked_users', blank=True, symmetrical=False)
+    timezone = models.CharField(max_length=100, default='America/Sao_Paulo')
+
 
     def __str__(self):
         return self.username

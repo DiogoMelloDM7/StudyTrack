@@ -5,6 +5,9 @@ from .models import Event
 from .forms import EventForm
 from datetime import datetime
 from django.core.serializers.json import DjangoJSONEncoder
+from django.utils.timezone import make_aware
+import pytz
+from django.utils.timezone import localtime
 
 @login_required
 def calendario(request):
@@ -20,6 +23,8 @@ def calendario(request):
 
     
     user_events = Event.objects.filter(user=request.user)  # Filtra os eventos do usuário
+    for event in user_events:
+        event.dateEvent = localtime(event.dateEvent, pytz.timezone(request.user.timezone))
     return render(request, 'calendario.html', {'events': user_events, 'form': form})
 
 @login_required
@@ -35,6 +40,8 @@ def add_event(request):
         if form.is_valid():
             event = form.save(commit=False)
             event.user = request.user  # Associar o evento ao usuário logado
+            user_tz = pytz.timezone(request.user.timezone)
+            event.dateEvent = make_aware(event.dateEvent, user_tz)
             event.save()
             return redirect('calendar_diary:calendario')  # Redirecionar para o calendário após salvar
     else:
