@@ -36,6 +36,40 @@
                     <button type="submit" class='btn-login'>Salvar Evento</button>
                 </form>
             </div>
+
+            <div id="list-events-edit" style='display:none;'>
+                <div id="list-events-edit">
+                    {% for event in events %}
+                    <div class="event-item">
+                        {{ event.title }} - {{ event.dateEvent }}
+                        <button class="btn-edit" data-event-id="{{ event.pk }}">Editar</button>
+                        
+                        <!-- Formulário de edição (inicialmente oculto) -->
+                        <form id="edit-form-{{ event.pk }}" class="edit-form" action="{% url 'calendar_diary:editar_evento' event.pk %}" method="POST" style="display: none;">
+                            {% csrf_token %}
+                            <input type="text" name="title" value="{{ event.title }}" required>
+                            <input type="text" name="description" value="{{ event.description }}" required>
+                            <input type="datetime-local" name="dateEvent" value="{{ event.dateEvent|date:'Y-m-d\\TH:i' }}" required>
+                            <input type="text" name="localization" value="{{ event.localization }}" required>
+                            <button type="submit">Salvar</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+            
+            
+            
+
+            <div id="list-events-delete" style='display:none;'>
+                {% for event in events %}
+                <div class="event-item">
+                    {{ event.title }} - {{ event.dateEvent }}
+                    <button class="btn-delete" data-event-id="{{ event.pk }}">Excluir</button>
+                </div>
+                {% endfor %}
+            </div>
         </article>
         <article class='content-calendar'>
             <div id="calendar"></div>
